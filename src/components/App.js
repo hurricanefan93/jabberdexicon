@@ -4,7 +4,8 @@ import Definition from './Definition.js'
 import Search from './Search.js'
 class App extends Component {
   state = {
-    active: {}
+    active: {},
+    Term: {}
   }
 
 // const token = 'banapple';
@@ -51,7 +52,9 @@ class App extends Component {
     window.fetch(url)
     .then(r => r.json())
     .then(data => {
-      console.log(data)
+      this.setState({
+        Term: data
+      })
     })
   }
 
