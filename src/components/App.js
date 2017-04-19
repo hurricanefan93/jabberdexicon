@@ -2,9 +2,17 @@ import React, { Component } from 'react'
 import AddWord from './AddWord.js'
 import Definition from './Definition.js'
 import Search from './Search.js'
+import Home from './Home.js'
+import RevealWord from './RevealWord.js'
+import WordList from './WordList.js'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+const token = 'example'
+
 class App extends Component {
   state = {
-    active: []
+    active: [],
+    search: [],
+    clicked: false
   }
 
   componentDidMount () {
@@ -36,33 +44,42 @@ class App extends Component {
     }).then(r => r.json())
     .then(data => {
       this.loadTerms()
+      console.log(data)
     })
   }
 
-  searchWord = searchTerm => {
+  searchWord = (searchTerm) => {
     const url = 'https://jabberdexicon.herokuapp.com/entries?access_token=example'
     window.fetch(url)
     .then(r => r.json())
     .then(data => {
-      this.setState({
-        Term: data
-      })
+      const searchFilter = data.filter(item => item.term.includes(searchTerm))
+      console.log(searchFilter)
     })
   }
 
+  _click = () => {
+    this.setState({ clicked: true })
+    console.log('click')
+  }
+
   render () {
-    return <div className='App'>
-      <header>
-        <h1>Jabberdexicon</h1>
-      </header>
-      <main>
-        <div className='userinput'>
-          <AddWord addWord={this.addWord} />
-          <Search searchWord={this.searchWord} />
-          <Definition active={this.state.active} />
-        </div>
-      </main>
-    </div>
+    return <Router>
+      <div className='App'>
+        <header>
+          <h1>Jabberdexicon</h1>
+        </header>
+        <main>
+          <div className='userinput'>
+            <Route exact path='/' component={Home} />
+            <Route path='/entry/:slug' component={Definition} />
+            <Search searchWord={this.searchWord} />
+            <AddWord addWord={this.addWord} />
+            <WordList active={this.state.active} />
+          </div>
+        </main>
+      </div>
+    </Router>
   }
 }
 

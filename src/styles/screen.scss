@@ -14,7 +14,14 @@ body {
 header {
   display: flex;
   justify-content: center;
-  color: white;
+
+  .titleLink {
+    text-decoration: none;
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
 }
 
 main {

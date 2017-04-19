@@ -4,8 +4,10 @@ class AddWord extends Component {
   _submit = e => {
     e.preventDefault()
     this.props.addWord(this.refs.newTerm.value, this.refs.newDef.value)
-    this.refs.newTerm.value = ''
-    this.refs.newDef.value = ''
+    const word = this.refs.addWord
+    const def = this.refs.addDef
+    word.value = ''
+    def.value = ''
   }
 
   _focus = (e) => {
@@ -13,11 +15,13 @@ class AddWord extends Component {
   }
 
   render () {
-    return <form onSubmit={this._submit}>
-      <input onFocus={this._focus} type='text' ref='newTerm' placeholder='New Term' />
-      <textarea onFocus={this._focus} type='text' ref='newDef' placeholder='New Definition' />
-      <input type='submit' value='Add' />
-    </form>
+    return (
+      <form onSubmit={this._submit}>
+        <input onFocus={this._focus} type='text' ref='addWord' placeholder='New Term' />
+        <textarea onFocus={this._focus} type='text' ref='addDef' placeholder='New Definition' />
+        <input type='submit' value='Add' />
+      </form>
+    )
   }
 }
 
