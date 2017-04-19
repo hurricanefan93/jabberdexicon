@@ -4,27 +4,21 @@ import Definition from './Definition.js'
 import Search from './Search.js'
 class App extends Component {
   state = {
-    active: {},
-    Term: {}
+    active: []
   }
 
-// const token = 'banapple';
-
   componentDidMount () {
-    // the URL to "get" todo items
+    this.loadTerms()
+  }
+
+  loadTerms () {
     const url = 'https://jabberdexicon.herokuapp.com/entries?access_token=example'
-    // make an AJAX request to that URL
     window.fetch(url)
-      // fetch returns a promsise, which yeilds the "response", we call it 'r'
-      // The response has a method json(), that returns another promise
       .then(r => r.json())
-      // then JSON is done parsing, the promise will yeild the "data"
       .then(data => {
-        // use the data as the state for our items
         this.setState({
           active: data
         })
-        console.log(data)
       })
   }
 
@@ -41,9 +35,7 @@ class App extends Component {
       })
     }).then(r => r.json())
     .then(data => {
-      this.setState({
-        active: data
-      })
+      this.loadTerms()
     })
   }
 
@@ -67,7 +59,7 @@ class App extends Component {
         <div className='userinput'>
           <AddWord addWord={this.addWord} />
           <Search searchWord={this.searchWord} />
-          <Definition term={this.state.active.term} definition={this.state.active.definition} />
+          <Definition active={this.state.active} />
         </div>
       </main>
     </div>

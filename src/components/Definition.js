@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 
 class Definition extends Component {
   render () {
+    const showTerm = this.props.active.map((word) => {
+      return <p key={word.id}> {word.term} </p>
+    })
     return <div className='definition'>
-      <h3>Term: {this.props.term}</h3>
-      <p>Definition: {this.props.definition}</p>
+      {showTerm}
     </div>
   }
 }

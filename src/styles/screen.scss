@@ -7,12 +7,14 @@ html {
 }
 
 body {
+  background-color: rgb(4, 175, 213);
   font: $base-text-size / 1 $base-font-family;
 }
 
 header {
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 main {
@@ -36,6 +38,8 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
+  color: orange;
 }
 
 .result {
