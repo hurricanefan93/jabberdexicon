@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import AddWord from './AddWord.js'
-import Definition from './Definition.js'
+import Result from './Result.js'
 import Search from './Search.js'
 import Home from './Home.js'
 import RevealWord from './RevealWord.js'
 import WordList from './WordList.js'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 const token = 'example'
 
 class App extends Component {
@@ -67,15 +67,18 @@ class App extends Component {
     return <Router>
       <div className='App'>
         <header>
-          <h1>Jabberdexicon</h1>
+          <NavLink className={Home} to={'/'}>
+          Jabberdexicon
+        </NavLink>
         </header>
         <main>
           <div className='userinput'>
             <Route exact path='/' component={Home} />
-            <Route path='/entry/:slug' component={Definition} />
+            <Route path='/entries/:slug' component={Result} />
             <Search searchWord={this.searchWord} />
             <AddWord addWord={this.addWord} />
             <WordList active={this.state.active} />
+            <RevealWord />
           </div>
         </main>
       </div>

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 const token = 'example'
 
-class Definition extends Component {
+class Result extends Component {
+  state= {
+    active: {}
+  }
+
   updateEntry () {
     const slug = this.props.match.params.slug
     if (slug !== this.state.slug) {
@@ -32,4 +37,4 @@ class Definition extends Component {
   }
 }
 
-export default Definition
+export default Result

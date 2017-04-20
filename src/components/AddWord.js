@@ -3,11 +3,9 @@ import React, { Component } from 'react'
 class AddWord extends Component {
   _submit = e => {
     e.preventDefault()
-    this.props.addWord(this.refs.newTerm.value, this.refs.newDef.value)
-    const word = this.refs.addWord
-    const def = this.refs.addDef
-    word.value = ''
-    def.value = ''
+    this.props.addWord(this.refs.addWord.value, this.refs.addDef.value)
+    this.refs.addWord.value = ''
+    this.refs.addDef.value = ''
   }
 
   _focus = (e) => {
