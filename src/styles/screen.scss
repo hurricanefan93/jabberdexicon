@@ -1,83 +1,95 @@
 @import 'utility';
-$base-text-size: 16px;
-$base-font-family: sans-serif;
 
 html {
   @include full-height;
 }
 
 body {
-  background-color: rgb(4, 175, 213);
+  background-color: rgb(209, 209, 209);
+  margin: 0;
   font: $base-text-size / 1 $base-font-family;
+}
+
+a {
+  &:link,
+  &:visited {
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &:hover {
+    color: $link-color-hover;
+  }
+
+  &:active {
+    color: $link-color-hover;
+  }
+}
+
+.App {
+  max-width: 720px;
+  padding: 1em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
   display: flex;
-  justify-content: center;
-
-  a {
-    text-decoration: none;
-    color: orange;
-    font-size: 30px;
-  }
-}
-
-.info {
-  display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-
-  h1 {
-    margin-bottom: 5px;
-  }
 }
 
-main {
-  form {
+nav {
+  ul {
+    @include reset-list;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-around;
+    text-transform: uppercase;
 
-    input {
-      margin-bottom: 10px;
-
-      textarea {
-        margin-bottom: 30px;
-      }
+    a.active {
+      color: hsl(208, 89%, 32%);
     }
   }
 }
 
-.Home {
-  display: flex;
-  justify-content: center;
+main {
+  flex: 1;
+}
 
-  img {
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Home {
+  text-align: center;
+
+  .random ul {
+    @include reset-list;
+
     display: flex;
     justify-content: center;
+
+    li {
+      padding: 1em;
+    }
+  }
+}
+
+.AddWord {
+  color: orange;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 50px;
-    width: 50px;
   }
-}
-
-.WordList {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  a {
-    color: orange;
-    text-decoration: none;
-  }
-}
-
-.result {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }

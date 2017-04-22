@@ -1,5 +1,9 @@
-$base-text-size: 16px;
+$base-text-size: 20px;
 $base-font-family: sans-serif;
+
+$link-color: rgb(59, 187, 200);
+$link-color-hover: orange;
+$link-color-active: orange;
 
 // Remove the browsers built-in styling for lists elements.
 @mixin reset-list {

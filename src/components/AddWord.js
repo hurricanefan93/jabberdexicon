@@ -1,25 +1,36 @@
 import React, { Component } from 'react'
+import { post } from '../api'
 
 class AddWord extends Component {
-  _submit = e => {
-    e.preventDefault()
-    this.props.addWord(this.refs.addWord.value, this.refs.addDef.value)
-    this.refs.addWord.value = ''
-    this.refs.addDef.value = ''
-  }
-
-  _focus = (e) => {
-    e.target.setSelectionRange(0, e.target.value.length)
+  _submit = (event) => {
+    event.preventDefault()
+    post('/entries', {
+      entry: {
+        term: this.refs.term.value,
+        definition: this.refs.definition.value
+      }
+    }).then((entry) => {
+      this.props.history.push(`/entry/${entry.slug}`)
+    })
   }
 
   render () {
-    return (
-      <form onSubmit={this._submit}>
-        <input onFocus={this._focus} type='text' ref='addWord' placeholder='New Term' />
-        <textarea onFocus={this._focus} type='text' ref='addDef' placeholder='New Definition' />
-        <input type='submit' value='Add' />
+    return <div className='AddWord'>
+      <h2>Add and Entry</h2>
+      <form action='#' onSubmit={this._submit}>
+        <p>
+          <label>Term</label>
+          <input type='text' ref='term' />
+        </p>
+        <p>
+          <label>Definition</label>
+          <textarea cols='30' rows='10' ref='definition' />
+        </p>
+        <p>
+          <button type='submit'>Save</button>
+        </p>
       </form>
-    )
+    </div>
   }
 }
 

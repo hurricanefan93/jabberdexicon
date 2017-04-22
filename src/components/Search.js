@@ -1,34 +1,33 @@
 import React, { Component } from 'react'
+import WordList from './WordList'
+import { get } from '../api'
 
 class Search extends Component {
   state = {
-    active: []
+    query: null,
+    entries: []
   }
 
-  getResults (query) {
-    const url = `https://jabberdexicon.herokuapp.com/entries?q=${query}?access_token=example`
-    window.fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      this.setState({
-        active: data
-      }, console.log(data))
-    })
-  }
-  _submit = e => {
-    e.preventDefault()
-    this.getResults(e.target.value)
+  doSearch () {
+    const query = this.props.match.params.query
+    if (query !== this.state.query) {
+      get('/entries', query).then(entries => this.setState({ entries, query }))
+    }
   }
 
-  _focus = (e) => {
-    e.target.setSelectionRange(0, e.target.value.length)
+  componentDidMount () {
+    this.doSearch()
+  }
+
+  componentDidUpdate () {
+    this.doSearch()
   }
 
   render () {
-    return <form onChange={this._submit} className='Search'>
-      <input onFocus={this._focus} type='text' ref='searchText' placeholder='Search something!' />
-      <input type='submit' value='Search' />
-    </form>
+    return <div className='Search'>
+      <h2>Searching for "{this.props.match.params.query}"</h2>
+      <WordList entries={this.state.entries} />
+    </div>
   }
 }
 

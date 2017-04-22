@@ -1,11 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
+import _ from 'lodash'
+import WordList from './WordList'
 
-class Home extends Component {
-  render () {
-    return <div className='Home'>
-      <img src='https://img.clipartfest.com/86cae4b3a8265a42a16be9b0193ca08e_book-clipart-transparent-book-clipart-transparent-background_400-275.png' />
+const Home = ({ entries }) => (
+  <div className='Home'>
+
+    <h3>Random Entries</h3>
+
+    <div className='random'>
+      <WordList entries={_.sampleSize(entries, 4)} />
     </div>
-  }
-}
+  </div>
+)
 
 export default Home

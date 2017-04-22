@@ -1,19 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-class WordList extends Component {
-  render () {
-    const showWord = this.props.active.map((item) => {
-      return <p key={item.id}>
-        <Link to={`/entries/${item.slug}`}>{item.term}</Link>
-      </p>
-    })
-    return (
-      <div className='WordList'>
-        {showWord}
-      </div>
-    )
-  }
-}
+const WordList = ({ entries }) => (
+  <ul>
+    {entries.map((entry) => (
+      <li key={entry.id}>
+        <Link to={`/entry/${entry.slug}`}>{entry.term}</Link>
+      </li>
+    ))}
+  </ul>
+)
 
 export default WordList

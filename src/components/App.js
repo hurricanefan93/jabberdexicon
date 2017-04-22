@@ -1,86 +1,59 @@
 import React, { Component } from 'react'
-import AddWord from './AddWord.js'
-import Result from './Result.js'
-import Search from './Search.js'
-import Home from './Home.js'
-import RevealWord from './RevealWord.js'
-import WordList from './WordList.js'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
-const token = 'example'
+import { BrowserRouter as Router, Link, NavLink, Route } from 'react-router-dom'
+import Home from './Home'
+import Entry from './Entry'
+import Browse from './Browse'
+import AddWord from './AddWord'
+import Search from './Search'
+import SearchForm from './SearchForm'
+import { get } from '../api'
+
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 class App extends Component {
   state = {
-    active: [],
-    search: [],
-    clicked: false
+    entries: []
   }
 
   componentDidMount () {
-    this.loadTerms()
-  }
-
-  loadTerms () {
-    const url = 'https://jabberdexicon.herokuapp.com/entries?access_token=example'
-    window.fetch(url)
-      .then(r => r.json())
-      .then(data => {
-        this.setState({
-          active: data
-        })
-      })
-  }
-
-  addWord = (newTerm, newDef) => {
-    const url = 'https://jabberdexicon.herokuapp.com/entries?access_token=example'
-    window.fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        'entry': {
-          'term': newTerm,
-          'definition': newDef
-        }
-      })
-    }).then(r => r.json())
-    .then(data => {
-      this.loadTerms()
-      console.log(data)
+    get('/entries').then((entries) => {
+      this.setState({ entries })
     })
-  }
-
-  searchWord = (searchTerm) => {
-    const url = 'https://jabberdexicon.herokuapp.com/entries?access_token=example'
-    window.fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      const searchFilter = data.filter(item => item.term.includes(searchTerm))
-      console.log(searchFilter)
-    })
-  }
-
-  _click = () => {
-    this.setState({ clicked: true })
-    console.log('click')
   }
 
   render () {
     return <Router>
       <div className='App'>
         <header>
-          <NavLink className={Home} to={'/'}>
-          Jabberdexicon
-        </NavLink>
+          <h1><Link to='/'>The Jabberdexicon</Link></h1>
+          <SearchForm />
         </header>
+        <nav>
+          <ul>
+            {ALPHABET.map((l) => (
+              <li key={l}>
+                <NavLink to={`/browse/${l}`}>{l}</NavLink>
+              </li>
+            ))}
+            <li><NavLink to='/browse/0'>#</NavLink></li>
+          </ul>
+        </nav>
         <main>
-          <div className='userinput'>
-            <Route exact path='/' component={Home} />
-            <Route path='/entries/:slug' component={Result} />
-            <Search searchWord={this.searchWord} />
-            <AddWord addWord={this.addWord} />
-            <WordList active={this.state.active} />
-            <RevealWord />
-          </div>
+          <Route exact path='/' render={(props) => (
+            <Home entries={this.state.entries} {...props} />
+          )} />
+          <Route exact path='/browse/:to' render={(props) => (
+            <Browse entries={this.state.entries} {...props} />
+          )} />
+          <Route path='/entry/:slug' component={Entry} />
+          <Route path='/search/:query' component={Search} />
+          <Route path='/new' component={AddWord} />
         </main>
+        <footer>
+          <button><Link to='/new'>Add an Entry</Link></button>
+
+          <p>Made with &hearts; at The Iron Yard by Garret Morales</p>
+        </footer>
       </div>
     </Router>
   }
