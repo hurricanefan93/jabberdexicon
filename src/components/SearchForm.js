@@ -12,7 +12,9 @@ class SearchForm extends Component {
 
   render () {
     return <form action='#' onSubmit={this._submit}>
-      <input type='search' ref='query' />
+      <div className='searchbar'>
+        <input type='text' ref='query' className='search' placeholder='Search..' />
+      </div>
     </form>
   }
 }

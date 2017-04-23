@@ -6,9 +6,27 @@ html {
 
 body {
   background-color: rgb(209, 209, 209);
-  margin: 0;
   font: $base-text-size / 1 $base-font-family;
+  height: 100vh;
 }
+
+.searchbar {
+  input.search {
+    width: 75px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+
+    input.search:focus {
+      width: 175px;
+    }
+  }
+}
+
 
 a {
   &:link,
@@ -23,16 +41,39 @@ a {
   }
 
   &:active {
-    color: $link-color-hover;
+    color: orange;
   }
+}
+
+button {
+  background-color: white;
+  border-radius: 5px;
 }
 
 .App {
   max-width: 720px;
+  height: 100vh;
   padding: 1em;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+.Entry {
+  h2,
+  p {
+    color: orange;
+  }
+}
+
+.Browse {
+  ul {
+    list-style: none;
+  }
+
+  h2 {
+    color: orange;
+  }
 }
 
 header {
@@ -57,12 +98,8 @@ nav {
 
 main {
   flex: 1;
-}
-
-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .Home {
@@ -92,4 +129,11 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: static;
 }
