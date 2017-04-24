@@ -10,23 +10,21 @@ body {
   height: 100vh;
 }
 
-.searchbar {
-  input.search {
-    width: 75px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-
-    input.search:focus {
-      width: 175px;
-    }
-  }
+.search {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 75px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  float: right;
 }
 
+.search:focus {
+  width: 100%;
+  outline-color: orange;
+}
 
 a {
   &:link,
@@ -41,7 +39,7 @@ a {
   }
 
   &:active {
-    color: orange;
+    color: $link-color-hover;
   }
 }
 
@@ -60,9 +58,12 @@ button {
 }
 
 .Entry {
-  h2,
-  p {
+  h2 {
     color: orange;
+  }
+
+  p {
+    color: $link-color;
   }
 }
 
@@ -98,18 +99,17 @@ nav {
 
 main {
   flex: 1;
-  display: flex;
-  align-items: flex-end;
 }
 
-.Home {
+.homescreen {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   .random ul {
     @include reset-list;
-
-    display: flex;
-    justify-content: center;
 
     li {
       padding: 1em;
@@ -122,6 +122,22 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  textarea {
+    border-radius: 5px;
+    border: 2px solid grey;
+    box-shadow: 1.5px 1.5px grey;
+    outline-color: $link-color;
+  }
+
+  input {
+    outline-color: $link-color;
+  }
+
+  h2 {
+    display: flex;
+    justify-content: center;
+  }
 
   p {
     display: flex;
@@ -136,4 +152,8 @@ footer {
   justify-content: space-between;
   align-items: center;
   position: static;
+
+  p {
+    font-size: 15px;
+  }
 }

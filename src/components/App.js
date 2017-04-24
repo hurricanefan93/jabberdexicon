@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Link, NavLink, Route } from 'react-router-dom'
-import Home from './Home'
-import Entry from './Entry'
-import Browse from './Browse'
-import AddWord from './AddWord'
-import Search from './Search'
-import SearchForm from './SearchForm'
 import { get } from '../api'
+import Home from './Home'
+import SearchForm from './SearchForm'
+import Search from './Search'
+import Browse from './Browse'
+import Entry from './Entry'
+import AddWord from './AddWord'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
@@ -30,18 +30,19 @@ class App extends Component {
         </header>
         <nav>
           <ul>
-            {ALPHABET.map((l) => (
-              <li key={l}>
-                <NavLink to={`/browse/${l}`}>{l}</NavLink>
+            {ALPHABET.map((i) => (
+              <li key={i}>
+                <NavLink to={`/browse/${i}`}>{i}</NavLink>
               </li>
             ))}
             <li><NavLink to='/browse/0'>#</NavLink></li>
           </ul>
         </nav>
         <main>
-          <Route exact path='/' render={(props) => (
-            <Home entries={this.state.entries} {...props} />
-          )} />
+          <div className='homescreen'>
+            <Route exact path='/' render={(props) => (
+              <Home entries={this.state.entries} {...props} />
+          )} /> </div>
           <Route exact path='/browse/:to' render={(props) => (
             <Browse entries={this.state.entries} {...props} />
           )} />

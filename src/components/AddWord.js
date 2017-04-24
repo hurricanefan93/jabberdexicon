@@ -27,7 +27,7 @@ class AddWord extends Component {
           <textarea cols='30' rows='10' ref='definition' />
         </p>
         <p>
-          <button type='submit'>Save</button>
+          <button type='submit'>ADD</button>
         </p>
       </form>
     </div>

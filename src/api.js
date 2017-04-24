@@ -1,4 +1,4 @@
-const TOKEN = 'example'
+const TOKEN = 'vorpal'
 const API_BASE = 'https://jabberdexicon.herokuapp.com'
 
 const get = (path, query) => {
