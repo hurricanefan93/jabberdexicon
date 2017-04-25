@@ -5,7 +5,8 @@ html {
 }
 
 body {
-  background-color: rgb(209, 209, 209);
+  background-image: url('http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/black-wallpaper-3.jpg');
+  // background-color: rgb(209, 209, 209);
   font: $base-text-size / 1 $base-font-family;
   height: 100vh;
 }
@@ -101,6 +102,12 @@ main {
   flex: 1;
 }
 
+.Home {
+  h3 {
+    color: white;
+  }
+}
+
 .homescreen {
   text-align: center;
   display: flex;
@@ -155,5 +162,6 @@ footer {
 
   p {
     font-size: 15px;
+    color: rgb(212, 212, 212);
   }
 }
